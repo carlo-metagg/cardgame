@@ -123,6 +123,128 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &59866409
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5660517898446979576, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_Name
+      value: MinionCard (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.23787
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.11834854
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744408150961100392, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: cardData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b4ff227eb37529419687ca50d6ed267, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+--- !u!1001 &539959252
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5660517898446979576, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_Name
+      value: MinionCard (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.3697243
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1920073
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744408150961100392, guid: d85614c7968868045ace24b5efd784b4, type: 3}
+      propertyPath: cardData
+      value: 
+      objectReference: {fileID: 11400000, guid: a380d8bc2c3d6f543beefd9857950196, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d85614c7968868045ace24b5efd784b4, type: 3}
 --- !u!1 &1653916573
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5660517898446979577, guid: d85614c7968868045ace24b5efd784b4, type: 3}
       propertyPath: m_LocalPosition.x
