@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 using TMPro;
 
-public class MinionCardDisplay : MonoBehaviour
+public class MinionCardDisplay : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private MinionCardData cardData;
 
@@ -28,4 +30,20 @@ public class MinionCardDisplay : MonoBehaviour
     }
 
     public MinionCardData CardData { set => cardData = value;  }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        print("begin drag");
+        transform.SetParent(transform.root);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        transform.position = Input.mousePosition;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        print("End drag");
+    }
 }
