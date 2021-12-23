@@ -26,7 +26,7 @@ public class BattleSystemBehaviour : MonoBehaviour
     private void SpawnCard(MinionCardData entry)
     {
         GameObject card = Instantiate(cardPrefab);
-        card.GetComponent<MinionCardDisplay>().CardData = entry;
+        card.GetComponent<MinionBehaviour>().CardData = entry;
 
         Transform cardTransform = card.transform;
         cardTransform.SetParent(playerHand.transform);

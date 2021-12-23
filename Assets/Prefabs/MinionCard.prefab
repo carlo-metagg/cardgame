@@ -888,6 +888,7 @@ MonoBehaviour:
   attack: {fileID: 5660517899190836892}
   health: {fileID: 5660517899255266945}
   manaCost: {fileID: 5660517897916802949}
+  scaleMultiplier: 0.5
 --- !u!114 &4465630729100175700
 MonoBehaviour:
   m_ObjectHideFlags: 0
