@@ -1,10 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-using TMPro;
-
-public class MinionCardDisplay : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class NewMinionBehaviourScript : MonoBehaviour
 {
     [SerializeField] private MinionCardData cardData;
 
@@ -17,7 +17,12 @@ public class MinionCardDisplay : MonoBehaviour, IBeginDragHandler, IDragHandler,
     [SerializeField] private TextMeshProUGUI health;
     [SerializeField] private TextMeshProUGUI manaCost;
 
-    void Start()
+    void Awake()
+    {
+        InitializeCard();
+    }
+
+    private void InitializeCard()
     {
         cardName.text = cardData.CardName;
         description.text = cardData.Description;
@@ -29,21 +34,8 @@ public class MinionCardDisplay : MonoBehaviour, IBeginDragHandler, IDragHandler,
         manaCost.text = cardData.ManaCost.ToString();
     }
 
-    public MinionCardData CardData { set => cardData = value;  }
-
-    public void OnBeginDrag(PointerEventData eventData)
+    void Update()
     {
-        print("begin drag");
-        transform.SetParent(transform.root);
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        transform.position = Input.mousePosition;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        print("End drag");
+        
     }
 }
