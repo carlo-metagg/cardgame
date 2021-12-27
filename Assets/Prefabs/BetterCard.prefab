@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5313143627222848198}
   - component: {fileID: 5313143627222848217}
+  - component: {fileID: 8112264505873098236}
   m_Layer: 0
   m_Name: BetterCard
   m_TagString: Untagged
@@ -51,6 +52,34 @@ MonoBehaviour:
   attack: {fileID: 5313143629045281385}
   health: {fileID: 5313143627419157944}
   manaCost: {fileID: 5313143628387643429}
+  lerpMultiplier: 20
+  returnToHandDuration: 0.1
+--- !u!61 &8112264505873098236
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313143627222848199}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4, y: 5}
+  m_EdgeRadius: 0
 --- !u!1 &5313143627419157926
 GameObject:
   m_ObjectHideFlags: 0

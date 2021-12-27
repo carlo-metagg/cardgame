@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,9 +18,17 @@ public class NewMinionBehaviourScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI health;
     [SerializeField] private TextMeshProUGUI manaCost;
 
+    [SerializeField] private float lerpMultiplier = 20;
+    [SerializeField] private float returnToHandDuration = 0.5f;
+
+    private Vector3 initialPosition;
+    private Vector3 delta;
+
     void Awake()
     {
         InitializeCard();
+
+        initialPosition = transform.position;
     }
 
     private void InitializeCard()
@@ -37,5 +46,39 @@ public class NewMinionBehaviourScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnMouseDown()
+    {
+        print("mouse down!");
+    }
+
+    private void OnMouseDrag()
+    {
+        print("dragging!");
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        transform.position = Vector2.Lerp(transform.position, mousePosition, Time.deltaTime * lerpMultiplier);
+    }
+
+    private void OnMouseUp()
+    {
+        //transform.position = initialPosition;
+        StartCoroutine(ReturnToInitial());
+    }
+
+    private IEnumerator ReturnToInitial()
+    {
+        Vector3 startingPos = transform.position;
+        Vector3 finalPos = initialPosition;
+        float elapsedTime = 0;
+
+        while (finalPos != transform.position)
+        {
+            float lerpTravelPercentage = elapsedTime / returnToHandDuration;
+            transform.position = Vector3.Lerp(startingPos, finalPos, lerpTravelPercentage);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }
