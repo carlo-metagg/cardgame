@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleSystemBehaviour : MonoBehaviour
+public class BattleSystemBehaviourOld : MonoBehaviour
 {
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject playerHand;
@@ -26,7 +26,7 @@ public class BattleSystemBehaviour : MonoBehaviour
     private void SpawnCard(MinionCardData entry)
     {
         GameObject card = Instantiate(cardPrefab);
-        card.GetComponent<MinionBehaviour>().CardData = entry;
+        card.GetComponent<MinionBehaviourOld>().CardData = entry;
 
         Transform cardTransform = card.transform;
         cardTransform.SetParent(playerHand.transform);
