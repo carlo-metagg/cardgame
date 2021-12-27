@@ -38,7 +38,7 @@ public class MinionBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         transform.localScale *= scaleMultiplier;
     }
 
-    public MinionCardData CardData { set => cardData = value;  }
+    public MinionCardData CardData { set => cardData = value; }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
