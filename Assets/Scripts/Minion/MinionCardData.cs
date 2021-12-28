@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "NewCardData", menuName = "Card Data/Minion")]
 public class MinionCardData : ScriptableObject
 {
     [SerializeField] private string cardName;
+    [Multiline(3)]
     [SerializeField] private string description;
 
     [SerializeField] private Sprite artwork;

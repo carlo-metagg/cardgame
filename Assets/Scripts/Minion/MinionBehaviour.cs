@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MinionBehaviour : MonoBehaviour
 {
+    [Header("UI Elements")]
     [SerializeField] private MinionCardData cardData;
 
     [SerializeField] private TextMeshProUGUI cardName;
@@ -18,17 +18,15 @@ public class MinionBehaviour : MonoBehaviour
     [SerializeField] private TextMeshProUGUI health;
     [SerializeField] private TextMeshProUGUI manaCost;
 
-    [SerializeField] private float lerpMultiplier = 20;
+    [Header("Lerping parameters")]
+    [SerializeField] private float dragLerpMultiplier = 20;
     [SerializeField] private float returnToHandDuration = 0.5f;
 
-    private Vector3 delta;
     private Vector3 initialPosition;
 
     void Start()
     {
         InitializeCard();
-
-        initialPosition = Vector3.zero;
     }
 
     private void InitializeCard()
@@ -44,6 +42,7 @@ public class MinionBehaviour : MonoBehaviour
     }
 
     public MinionCardData CardData { get => cardData;  set => cardData = value; }
+
     public  Vector3 InitialPosition { get => initialPosition; }
 
     public void SetCurrentPositionAsInitialPosition() => initialPosition = transform.position;
@@ -52,15 +51,15 @@ public class MinionBehaviour : MonoBehaviour
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        transform.position = Vector2.Lerp(transform.position, mousePosition, Time.deltaTime * lerpMultiplier);
+        transform.position = Vector2.Lerp(transform.position, mousePosition, Time.deltaTime * dragLerpMultiplier);
     }
 
     private void OnMouseUp()
     {
-        StartCoroutine(ReturnToInitial());
+        StartCoroutine(ReturnToInitialPosition());
     }
 
-    private IEnumerator ReturnToInitial()
+    private IEnumerator ReturnToInitialPosition()
     {
         Vector3 startingPos = transform.position;
         Vector3 finalPos = initialPosition;
