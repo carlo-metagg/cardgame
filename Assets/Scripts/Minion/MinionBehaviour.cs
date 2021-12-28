@@ -47,14 +47,15 @@ public class MinionBehaviour : MonoBehaviour
 
     public void SetCurrentPositionAsInitialPosition() => initialPosition = transform.position;
 
-    private void OnMouseDrag()
+    public void Drag()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 targetPosition = new Vector3(mousePosition.x, mousePosition.y, -1);
 
-        transform.position = Vector2.Lerp(transform.position, mousePosition, Time.deltaTime * dragLerpMultiplier);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * dragLerpMultiplier);
     }
 
-    private void OnMouseUp()
+    public void Release()
     {
         StartCoroutine(ReturnToInitialPosition());
     }
