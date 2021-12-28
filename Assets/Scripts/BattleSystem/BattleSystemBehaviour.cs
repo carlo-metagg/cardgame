@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,8 +17,6 @@ public class BattleSystemBehaviour : MonoBehaviour
     {
         List<GameObject> children = GetChildren(playerHand);
         float xAxisOffset = GetXAxisOffset(children[0], children[children.Count - 1]);
-
-        print(xAxisOffset);
 
         foreach (GameObject child in children)
         {
@@ -66,7 +63,6 @@ public class BattleSystemBehaviour : MonoBehaviour
         {
             GameObject card = SpawnCard(entries[i]);
             SetInitialPosition(card.transform, positionOffsets[i]);
-            //print(card.transform.localScale);
         }
     }
 
@@ -89,8 +85,6 @@ public class BattleSystemBehaviour : MonoBehaviour
         cardTransform.SetParent(playerHand.transform);
         cardTransform.localPosition = positionOffset;
     }
-
-    //TODO: how to implem scaling
     private GameObject SpawnCard(MinionCardData entry)
     {
         GameObject card = Instantiate(cardPrefab);
