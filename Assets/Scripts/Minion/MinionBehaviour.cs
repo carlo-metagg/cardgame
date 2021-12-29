@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,56 +21,46 @@ public class MinionBehaviour : MonoBehaviour
     [SerializeField] private float dragLerpMultiplier = 20;
     [SerializeField] private float returnToHandDuration = 0.5f;
 
-    private Vector3 initialPosition;
+    private Minion minion;
+    private CardDisplay cardDisplay;
+
+    private void Awake()
+    {
+        minion = new Minion(transform, dragLerpMultiplier, returnToHandDuration);
+    }
 
     void Start()
     {
-        InitializeCard();
-    }
+        cardDisplay = new CardDisplay(cardData,
+                                      cardName,
+                                      description,
+                                      artwork,
+                                      attack,
+                                      health,
+                                      manaCost);
 
-    private void InitializeCard()
-    {
-        cardName.text = cardData.CardName;
-        description.text = cardData.Description;
-
-        artwork.sprite = cardData.Artwork;
-
-        attack.text = cardData.Attack.ToString();
-        health.text = cardData.Health.ToString();
-        manaCost.text = cardData.ManaCost.ToString();
+        cardDisplay.InitializeCard();
     }
 
     public MinionCardData CardData { get => cardData;  set => cardData = value; }
 
-    public  Vector3 InitialPosition { get => initialPosition; }
-
-    public void SetCurrentPositionAsInitialPosition() => initialPosition = transform.position;
+    public void SetCurrentPositionAsInitialPosition() => minion.SetCurrentPositionAsInitialPosition();
 
     public void Drag()
+    {
+        minion.DragToPosition(GetTargetPosition());
+    }
+
+    private static Vector3 GetTargetPosition()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 targetPosition = new Vector3(mousePosition.x, mousePosition.y, -1);
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * dragLerpMultiplier);
+        return targetPosition;
     }
 
     public void Release()
     {
-        StartCoroutine(ReturnToInitialPosition());
-    }
-
-    private IEnumerator ReturnToInitialPosition()
-    {
-        Vector3 startingPos = transform.position;
-        Vector3 finalPos = initialPosition;
-        float elapsedTime = 0;
-
-        while (finalPos != transform.position)
-        {
-            float lerpTravelPercentage = elapsedTime / returnToHandDuration;
-            transform.position = Vector3.Lerp(startingPos, finalPos, lerpTravelPercentage);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+        StartCoroutine(minion.ReturnToInitialPosition());
     }
 }
