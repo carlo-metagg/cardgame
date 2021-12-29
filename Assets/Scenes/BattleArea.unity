@@ -262,7 +262,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.019607844, g: 0.32156864, b: 0, a: 1}
   m_FlipX: 0
@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 1848871278}
   - component: {fileID: 1848871277}
   - component: {fileID: 1848871276}
+  - component: {fileID: 1848871279}
   m_Layer: 0
   m_Name: PlayArea
   m_TagString: Untagged
@@ -318,7 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05b44e6529c8b04f96b7a1b8a11a773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 5313143627222848199, guid: 721884d6a355c3643a859663601d77ca, type: 3}
   playerHand: {fileID: 1739353159}
 --- !u!212 &1848871277
 SpriteRenderer:
@@ -359,7 +359,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.39944342, g: 0.6792453, b: 0.3812745, a: 1}
   m_FlipX: 0
@@ -386,3 +386,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1848871279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848871275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd5b342c4c64384891adabbcb9cbcac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 5313143627222848199, guid: 721884d6a355c3643a859663601d77ca, type: 3}
+  playerHand: {fileID: 1739353159}
