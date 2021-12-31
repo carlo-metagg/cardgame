@@ -37,7 +37,8 @@ public class MinionBehaviour : MonoBehaviour
                                       artwork,
                                       attack,
                                       health,
-                                      manaCost);
+                                      manaCost,
+                                      transform.localScale);
 
         cardDisplay.InitializeCard();
     }
@@ -46,12 +47,9 @@ public class MinionBehaviour : MonoBehaviour
 
     public void SetCurrentPositionAsInitialPosition() => minion.SetCurrentPositionAsInitialPosition();
 
-    public void Drag()
-    {
-        minion.DragToPosition(GetTargetPosition());
-    }
+    public void Drag() => minion.DragToPosition(GetTargetPosition());
 
-    private static Vector3 GetTargetPosition()
+    private Vector3 GetTargetPosition()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 targetPosition = new Vector3(mousePosition.x, mousePosition.y, -1);
@@ -59,8 +57,10 @@ public class MinionBehaviour : MonoBehaviour
         return targetPosition;
     }
 
-    public void Release()
+    public void Release(Action actionAfterCoroutine)
     {
-        StartCoroutine(minion.ReturnToInitialPosition());
+        StartCoroutine(minion.ReturnToInitialPosition(actionAfterCoroutine));
     }
+
+    public Vector3 GetOriginalLocalScale() => cardDisplay.OriginalLocalScale;
 }

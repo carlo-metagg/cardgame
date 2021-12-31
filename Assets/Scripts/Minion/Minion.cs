@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Minion
@@ -21,7 +22,7 @@ public class Minion
         _transform.position = Vector3.Lerp(_transform.position, targetPosition, Time.deltaTime * _dragLerpMultiplier);
     }
 
-    public IEnumerator ReturnToInitialPosition()
+    public IEnumerator ReturnToInitialPosition(Action endOfCoroutineAction)
     {
         Vector3 startingPos = _transform.position;
         Vector3 finalPos = initialPosition;
@@ -36,6 +37,8 @@ public class Minion
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        endOfCoroutineAction();
     }
 
     public void SetCurrentPositionAsInitialPosition() => initialPosition = _transform.position;

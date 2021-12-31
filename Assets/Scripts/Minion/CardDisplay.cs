@@ -1,18 +1,20 @@
 ﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CardDisplay
 {
-    private MinionCardData cardData;
+    private MinionCardData _cardData;
 
-    private TextMeshProUGUI cardName;
-    private TextMeshProUGUI description;
+    private TextMeshProUGUI _cardName;
+    private TextMeshProUGUI _description;
 
-    private Image artwork;
+    private Image _artwork;
 
-    private TextMeshProUGUI attack;
-    private TextMeshProUGUI health;
-    private TextMeshProUGUI manaCost;
+    private TextMeshProUGUI _attack;
+    private TextMeshProUGUI _health;
+    private TextMeshProUGUI _manaCost;
+    private Vector3 _originalLocalScale;
 
     public CardDisplay(MinionCardData cardData,
                        TextMeshProUGUI cardName,
@@ -20,26 +22,30 @@ public class CardDisplay
                        Image artwork,
                        TextMeshProUGUI attack,
                        TextMeshProUGUI health,
-                       TextMeshProUGUI manaCost)
+                       TextMeshProUGUI manaCost,
+                       Vector3 localScale)
     {
-        this.cardData = cardData;
-        this.cardName = cardName;
-        this.description = description;
-        this.artwork = artwork;
-        this.attack = attack;
-        this.health = health;
-        this.manaCost = manaCost;
+        _cardData = cardData;
+        _cardName = cardName;
+        _description = description;
+        _artwork = artwork;
+        _attack = attack;
+        _health = health;
+        _manaCost = manaCost;
+        _originalLocalScale = localScale;
     }
+
+    public Vector3 OriginalLocalScale { get => _originalLocalScale; }
 
     public void InitializeCard()
     {
-        cardName.text = cardData.CardName;
-        description.text = cardData.Description;
+        _cardName.text = _cardData.CardName;
+        _description.text = _cardData.Description;
 
-        artwork.sprite = cardData.Artwork;
+        _artwork.sprite = _cardData.Artwork;
 
-        attack.text = cardData.Attack.ToString();
-        health.text = cardData.Health.ToString();
-        manaCost.text = cardData.ManaCost.ToString();
+        _attack.text = _cardData.Attack.ToString();
+        _health.text = _cardData.Health.ToString();
+        _manaCost.text = _cardData.ManaCost.ToString();
     }
 }
