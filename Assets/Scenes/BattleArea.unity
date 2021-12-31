@@ -320,6 +320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHand: {fileID: 1739353159}
+  previewCardYOffset: 3
+  previewCardScaleFactor: 1.3
 --- !u!212 &1848871277
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -400,3 +402,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 5313143627222848199, guid: 721884d6a355c3643a859663601d77ca, type: 3}
   playerHand: {fileID: 1739353159}
+  scaleFactor: 0.75
+  separationFactor: 0.05

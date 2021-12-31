@@ -8,7 +8,6 @@ public class BattleSystem
 
     public BattleSystem(GameObject playerHand, ISpawner spawner, BattleSystemUtils utils)
     {
-
         _playerHand = playerHand;
         _spawner = spawner;
         _utils = utils;
