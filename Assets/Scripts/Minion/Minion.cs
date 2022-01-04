@@ -8,7 +8,7 @@ public class Minion
     private readonly float _dragLerpMultiplier;
     private readonly float _returnToHandDuration;
 
-    private Vector3 initialPosition;
+    private Vector3 _initialPosition;
 
     public Minion(Transform transform, float dragLerpMultiplier, float returnToHandDuration)
     {
@@ -22,24 +22,7 @@ public class Minion
         _transform.position = Vector3.Lerp(_transform.position, targetPosition, Time.deltaTime * _dragLerpMultiplier);
     }
 
-    public IEnumerator ReturnToInitialPosition(Action endOfCoroutineAction)
-    {
-        Vector3 startingPos = _transform.position;
-        Vector3 finalPos = initialPosition;
-        float elapsedTime = 0;
-
-        while (finalPos != _transform.position)
-        {
-            float lerpTravelPercentage = elapsedTime / _returnToHandDuration;
-
-            _transform.position = Vector3.Lerp(startingPos, finalPos, lerpTravelPercentage);
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        endOfCoroutineAction();
-    }
-
-    public void SetCurrentPositionAsInitialPosition() => initialPosition = _transform.position;
+    public Vector3 InitialPosition { get => _initialPosition; set => _initialPosition = value; }
+    public void SetInitialPosition(Vector3 position) => _initialPosition = position;
+    public void SetCurrentPositionAsInitialPosition() => _initialPosition = _transform.position;
 }

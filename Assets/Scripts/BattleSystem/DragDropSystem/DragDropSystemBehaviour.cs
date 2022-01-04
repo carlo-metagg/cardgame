@@ -1,24 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class DragDropSystem
+public class DragDropSystemBehaviour : MonoBehaviour
 {
+    [Header("Card Preview Parameters")]
+
+    [SerializeField] 
     private ISpawner _spawner;
-    private readonly float _previewCardScaleFactor;
-    private readonly float _previewCardYOffset;
+
+    [SerializeField]
+    private float previewCardYOffset = 3f;
+
+    [Range(0, 3)]
+    [SerializeField]
+    private float previewCardScaleFactor = 1.3f;
+
+    [SerializeField]
+    private float returnToHandDuration = 0.5f;
 
     private GameObject _cardObject;
     private MinionBehaviour _cardBehaviour;
     private DragState _dragState;
     private GameObject _previewCard;
 
-    public DragDropSystem(ISpawner spawner, float previewCardScaleFactor, float previewCardYOffset)
+    private void Awake()
     {
-        _spawner = spawner;
-        _previewCardScaleFactor = previewCardScaleFactor;
-        _previewCardYOffset = previewCardYOffset;
+        _spawner = GetComponent<ISpawner>();
 
         ChangeState(DragState.Idle);
-        _previewCard = null;
     }
 
     public GameObject CardObject { 
@@ -75,20 +84,19 @@ public class DragDropSystem
         _previewCard.GetComponent<Collider2D>().enabled = false;
 
         _previewCard.transform.position = GenerateTargetPosition();
-
-        _previewCard.transform.localScale *= _previewCardScaleFactor;
+        _previewCard.transform.localScale *= previewCardScaleFactor;
     }
 
     private Vector3 GenerateTargetPosition()
     {
         Vector3 cardPosition = _cardObject.transform.position;
-        Vector3 previewCardTargetPosition = new Vector3(cardPosition.x, cardPosition.y + _previewCardYOffset, -1f);
+        Vector3 previewCardTargetPosition = new Vector3(cardPosition.x, cardPosition.y + previewCardYOffset, -1f);
         return previewCardTargetPosition;
     }
 
     private void DestroyCardPreview()
     {
-        Object.Destroy(_previewCard);
+        Destroy(_previewCard);
         _previewCard = null;
     }
 
@@ -106,20 +114,31 @@ public class DragDropSystem
         {
             ChangeState(DragState.Returning);
 
-            _cardBehaviour.Release(() => ChangeState(DragState.Idle));
+            StartCoroutine(ReturnToInitialPosition());
             _cardObject = null;
         }
+    }
+    private IEnumerator ReturnToInitialPosition()
+    {
+        Vector3 startingPos = _cardBehaviour.transform.position;
+        Vector3 finalPos = _cardBehaviour.Minion.InitialPosition;
+        float elapsedTime = 0;
+
+        while (finalPos != _cardBehaviour.transform.position)
+        {
+            float lerpTravelPercentage = elapsedTime / returnToHandDuration;
+
+            _cardBehaviour.transform.position = Vector3.Lerp(startingPos, finalPos, lerpTravelPercentage);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        ChangeState(DragState.Idle);
     }
 
     private void ChangeState(DragState state)
     {
         _dragState = state;
     }
-}
-
-public enum DragState
-{ 
-    Idle,
-    Dragging,
-    Returning
 }
