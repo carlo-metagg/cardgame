@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 1848871277}
   - component: {fileID: 1848871276}
   - component: {fileID: 1848871279}
+  - component: {fileID: 1848871280}
   m_Layer: 0
   m_Name: PlayArea
   m_TagString: Untagged
@@ -319,9 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05b44e6529c8b04f96b7a1b8a11a773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHand: {fileID: 1739353159}
-  previewCardYOffset: 3
-  previewCardScaleFactor: 1.3
 --- !u!212 &1848871277
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -404,3 +402,18 @@ MonoBehaviour:
   playerHand: {fileID: 1739353159}
   scaleFactor: 0.75
   separationFactor: 0.05
+--- !u!114 &1848871280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848871275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64a54494c91ae7438e52540bfa9fdb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previewCardYOffset: 3
+  previewCardScaleFactor: 1.3
+  returnToHandDuration: 0.1

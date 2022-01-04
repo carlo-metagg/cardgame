@@ -19,7 +19,7 @@ public class MinionBehaviour : MonoBehaviour
 
     [Header("Lerping parameters")]
     [SerializeField] private float dragLerpMultiplier = 20;
-    [SerializeField] private float returnToHandDuration = 0.5f;
+    [SerializeField] private float returnToHandDuration = 0.1f;
 
     private Minion minion;
     private CardDisplay cardDisplay;
@@ -44,8 +44,11 @@ public class MinionBehaviour : MonoBehaviour
     }
 
     public MinionCardData CardData { get => cardData;  set => cardData = value; }
+    public Minion Minion { get => minion; set => minion = value; }
 
     public void SetCurrentPositionAsInitialPosition() => minion.SetCurrentPositionAsInitialPosition();
+    
+    public void SetInitialPosition(Vector3 position) => minion.SetInitialPosition(position);
 
     public void Drag() => minion.DragToPosition(GetTargetPosition());
 
@@ -55,11 +58,6 @@ public class MinionBehaviour : MonoBehaviour
         Vector3 targetPosition = new Vector3(mousePosition.x, mousePosition.y, -1);
 
         return targetPosition;
-    }
-
-    public void Release(Action actionAfterCoroutine)
-    {
-        StartCoroutine(minion.ReturnToInitialPosition(actionAfterCoroutine));
     }
 
     public Vector3 GetOriginalLocalScale() => cardDisplay.OriginalLocalScale;
