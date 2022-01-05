@@ -21,17 +21,26 @@ public class MinionBehaviour : MonoBehaviour
     [SerializeField] private float dragLerpMultiplier = 20;
     [SerializeField] private float returnToHandDuration = 0.1f;
 
-    private Minion minion;
-    private CardDisplay cardDisplay;
+    [Header("Card Preview parameters")]
+    [SerializeField] private float previewCardYOffset = 3f;
+    [SerializeField] private float previewCardScaleFactor = 1.3f;
+
+    private Minion _minion;
+    private ISpawner _spawner;
+    private CardDisplay _cardDisplay;
+    private GameObject _previewCard;
+    private DragState _dragState;
 
     private void Awake()
     {
-        minion = new Minion(transform, dragLerpMultiplier, returnToHandDuration);
+        _spawner = GetComponent<ISpawner>();
+        _minion = new Minion(_spawner, transform, dragLerpMultiplier, returnToHandDuration, previewCardScaleFactor, previewCardYOffset);
+        ChangeState(DragState.Idle);
     }
 
     void Start()
     {
-        cardDisplay = new CardDisplay(cardData,
+        _cardDisplay = new CardDisplay(cardData,
                                       cardName,
                                       description,
                                       artwork,
@@ -40,17 +49,49 @@ public class MinionBehaviour : MonoBehaviour
                                       manaCost,
                                       transform.localScale);
 
-        cardDisplay.InitializeCard();
+        _cardDisplay.InitializeCard();
+    }
+
+    private void OnMouseEnter()
+    {
+        //todo: issue where other cards still spawn preview cards on hover while a card is being dragged.
+        //might be due to the fact this function is only called once
+        if (DragState.Idle != _dragState || Input.GetMouseButtonDown(0)) return;
+
+        _minion.Hover(cardData);
+    }
+
+    private void OnMouseExit()
+    {
+        _minion.DestroyPreviewCard();
+    }
+
+    private void OnMouseDown()
+    {
+        ChangeState(DragState.Dragging);
+    }
+
+    private void OnMouseDrag()
+    {
+        _minion.DestroyPreviewCard();
+        _minion.DragToPosition(GetTargetPosition());
+    }
+
+    private void OnMouseUp()
+    {
+        ChangeState(DragState.Returning);
+
+        StartCoroutine(_minion.ReturnToInitialPosition(() => ChangeState(DragState.Idle)));
     }
 
     public MinionCardData CardData { get => cardData;  set => cardData = value; }
-    public Minion Minion { get => minion; set => minion = value; }
+    public Minion Minion { get => _minion; set => _minion = value; }
 
-    public void SetCurrentPositionAsInitialPosition() => minion.SetCurrentPositionAsInitialPosition();
+    public void SetCurrentPositionAsInitialPosition() => _minion.SetCurrentPositionAsInitialPosition();
     
-    public void SetInitialPosition(Vector3 position) => minion.SetInitialPosition(position);
+    public void SetInitialPosition(Vector3 position) => _minion.SetInitialPosition(position);
 
-    public void Drag() => minion.DragToPosition(GetTargetPosition());
+    public void Drag() => _minion.DragToPosition(GetTargetPosition());
 
     private Vector3 GetTargetPosition()
     {
@@ -60,5 +101,11 @@ public class MinionBehaviour : MonoBehaviour
         return targetPosition;
     }
 
-    public Vector3 GetOriginalLocalScale() => cardDisplay.OriginalLocalScale;
+    public Vector3 GetOriginalLocalScale() => _cardDisplay.OriginalLocalScale;
+
+    private void ChangeState(DragState dragState)
+    {
+        Debug.Log($"ChangeState() {_dragState} -> {dragState}");
+        _dragState = dragState;
+    }
 }

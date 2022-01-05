@@ -2,5 +2,6 @@
 { 
     Idle,
     Dragging,
-    Returning
+    Returning,
+    Hovering
 }
