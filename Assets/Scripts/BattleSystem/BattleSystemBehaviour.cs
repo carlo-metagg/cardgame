@@ -21,40 +21,40 @@ public class BattleSystemBehaviour : MonoBehaviour
 
     private void Update()
     {
-        dragDrop.DragListener();
+        //dragDrop.DragListener();
 
-        RaycastHit2D hit = utils.GetNearestCollider();
+        //RaycastHit2D hit = utils.GetNearestCollider();
 
-        if (hit.collider)
-        {
-            GameObject nearestObject = hit.collider.gameObject;
-            bool isCard = nearestObject.GetComponent<MinionBehaviour>();
-            isCursorOnCard = true;
+        //if (hit.collider)
+        //{
+        //    GameObject nearestObject = hit.collider.gameObject;
+        //    bool isCard = nearestObject.GetComponent<MinionBehaviour>();
+        //    isCursorOnCard = true;
 
-            if (isCard)
-            {
-                dragDrop.CardObject = nearestObject;
+        //    if (isCard)
+        //    {
+        //        dragDrop.CardObject = nearestObject;
 
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    dragDrop.GrabCard();
-                }
+        //        if (Input.GetKeyDown(KeyCode.Mouse0))
+        //        {
+        //            dragDrop.GrabCard();
+        //        }
                 
-                if (!Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    dragDrop.Hover();
-                }
-            }
-        }
-        else if (isCursorOnCard)
-        {
-            dragDrop.ExitHover();
-            isCursorOnCard = false;
-        }
+        //        if (!Input.GetKeyDown(KeyCode.Mouse0))
+        //        {
+        //            dragDrop.Hover();
+        //        }
+        //    }
+        //}
+        //else if (isCursorOnCard)
+        //{
+        //    dragDrop.ExitHover();
+        //    isCursorOnCard = false;
+        //}
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            dragDrop.ReleaseCard();
-        }
+        //if (Input.GetMouseButtonUp(0))
+        //{
+        //    dragDrop.ReleaseCard();
+        //}
     }
 }

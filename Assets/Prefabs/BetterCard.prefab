@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5313143627222848198}
   - component: {fileID: 5291466068548290660}
-  - component: {fileID: 5313143627222848217}
   - component: {fileID: 8112264505873098236}
+  - component: {fileID: 5313143627222848217}
+  - component: {fileID: -6697935934725908663}
   m_Layer: 3
   m_Name: BetterCard
   m_TagString: Untagged
@@ -85,27 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5313143627222848217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5313143627222848199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d261e1a41ddb68344b39a41523ceea64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardData: {fileID: 11400000, guid: f1bb34814f3cdb94b83af3c01e088248, type: 2}
-  cardName: {fileID: 5313143628858425712}
-  description: {fileID: 5313143627541638862}
-  artwork: {fileID: 5313143627638466827}
-  attack: {fileID: 5313143629045281385}
-  health: {fileID: 5313143627419157944}
-  manaCost: {fileID: 5313143628387643429}
-  dragLerpMultiplier: 20
-  returnToHandDuration: 0.1
 --- !u!61 &8112264505873098236
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -132,6 +112,44 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.2, y: 5}
   m_EdgeRadius: 0
+--- !u!114 &5313143627222848217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313143627222848199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d261e1a41ddb68344b39a41523ceea64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardData: {fileID: 11400000, guid: f1bb34814f3cdb94b83af3c01e088248, type: 2}
+  cardName: {fileID: 5313143628858425712}
+  description: {fileID: 5313143627541638862}
+  artwork: {fileID: 5313143627638466827}
+  attack: {fileID: 5313143629045281385}
+  health: {fileID: 5313143627419157944}
+  manaCost: {fileID: 5313143628387643429}
+  dragLerpMultiplier: 20
+  returnToHandDuration: 0.1
+  previewCardYOffset: 3
+--- !u!114 &-6697935934725908663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313143627222848199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd5b342c4c64384891adabbcb9cbcac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 5313143627222848199}
+  playerHand: {fileID: 0}
+  scaleFactor: 0.75
+  separationFactor: 0.05
 --- !u!1 &5313143627419157926
 GameObject:
   m_ObjectHideFlags: 0

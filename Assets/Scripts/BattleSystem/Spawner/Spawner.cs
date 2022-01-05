@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour, ISpawner
             SetInitialPosition(card.transform, targetPositions[i]);
             InitialCardRescale(card.transform);
 
-            card.GetComponent<MinionBehaviour>().SetInitialPosition(card.transform.position);
+            card.GetComponent<MinionBehaviour>().SetInitialPosition(targetPositions[i]);
         }
     }
 
