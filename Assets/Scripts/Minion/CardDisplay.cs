@@ -33,11 +33,13 @@ public class CardDisplay
         _health = health;
         _manaCost = manaCost;
         _originalLocalScale = localScale;
+
+        InitializeCard();
     }
 
     public Vector3 OriginalLocalScale { get => _originalLocalScale; }
 
-    public void InitializeCard()
+    private void InitializeCard()
     {
         _cardName.text = _cardData.CardName;
         _description.text = _cardData.Description;
