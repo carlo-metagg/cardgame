@@ -34,7 +34,13 @@ public class MinionBehaviour : MonoBehaviour
     private void Awake()
     {
         _spawner = GetComponent<ISpawner>();
-        _minion = new Minion(_spawner, transform, dragLerpMultiplier, returnToHandDuration, previewCardScaleFactor, previewCardYOffset);
+        _minion = new Minion(_spawner,
+                             transform,
+                             dragLerpMultiplier,
+                             returnToHandDuration,
+                             previewCardScaleFactor,
+                             previewCardYOffset);
+
         ChangeState(DragState.Idle);
     }
 
@@ -48,8 +54,6 @@ public class MinionBehaviour : MonoBehaviour
                                       health,
                                       manaCost,
                                       transform.localScale);
-
-        _cardDisplay.InitializeCard();
     }
 
     private void OnMouseEnter()
@@ -80,11 +84,16 @@ public class MinionBehaviour : MonoBehaviour
     private void OnMouseUp()
     {
         ChangeState(DragState.Returning);
+        ReturnToIntiialPosition();
+    }
 
+    public void ReturnToIntiialPosition()
+    {
         StartCoroutine(_minion.ReturnToInitialPosition(() => ChangeState(DragState.Idle)));
     }
 
     public MinionCardData CardData { get => cardData;  set => cardData = value; }
+
     public Minion Minion { get => _minion; set => _minion = value; }
 
     public void SetCurrentPositionAsInitialPosition() => _minion.SetCurrentPositionAsInitialPosition();
