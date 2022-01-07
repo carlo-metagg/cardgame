@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Minion
@@ -14,7 +15,12 @@ public class Minion
 
     private Vector3 _initialPosition;
 
-    public Minion(ISpawner spawner, Transform transform, float dragLerpMultiplier, float returnToHandDuration, float previewCardScaleFactor, float previewCardYOffset)
+    public Minion(ISpawner spawner,
+                  Transform transform,
+                  float dragLerpMultiplier,
+                  float returnToHandDuration,
+                  float previewCardScaleFactor,
+                  float previewCardYOffset)
     {
         _spawner = spawner ?? throw new ArgumentNullException(nameof(spawner));
         _transform = transform ?? throw new ArgumentNullException(nameof(transform));
@@ -24,12 +30,9 @@ public class Minion
         _previewCardYOffset = previewCardYOffset;
     }
 
-    public void DragToPosition(Vector3 targetPosition)
-    {
-        _transform.position = Vector3.Lerp(_transform.position, targetPosition, Time.deltaTime * _dragLerpMultiplier);
-    }
+    public void DragToPosition(Vector3 targetPosition) => _transform.position = Vector3.Lerp(_transform.position, targetPosition, Time.deltaTime * _dragLerpMultiplier);
 
-    public IEnumerator ReturnToInitialPosition(Action action)
+    public IEnumerator LerpToInitialPosition(List<Action> actions)
     {
         Vector3 startingPos = _transform.localPosition;
         Vector3 finalPos = _initialPosition;
@@ -45,7 +48,30 @@ public class Minion
             yield return null;
         }
 
-        action();
+        foreach (Action action in actions)
+        {
+            action();
+        }
+    }
+
+    public IEnumerator LerpToPosition(Vector3 intialPosition, Vector3 targetPosition, float duration, System.Collections.Generic.List<Action> actions)
+    {
+        float elapsedTime = 0;
+
+        while (targetPosition != _transform.localPosition)
+        {
+            float lerpTravelPercentage = elapsedTime / duration;
+
+            _transform.localPosition = Vector3.Lerp(intialPosition, targetPosition, lerpTravelPercentage);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        foreach (Action action in actions)
+        {
+            action();
+        }
     }
 
     public void Hover(MinionCardData cardData)

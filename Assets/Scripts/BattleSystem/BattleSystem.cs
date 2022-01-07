@@ -2,12 +2,10 @@
 
 public class BattleSystem
 {
-    private readonly ISpawner _spawner;
     private readonly CardManager _cardManager;
 
-    public BattleSystem(ISpawner spawner, CardManager cardManager)
+    public BattleSystem(CardManager cardManager)
     {
-        _spawner = spawner;
         _cardManager = cardManager;
     }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -83,13 +84,38 @@ public class MinionBehaviour : MonoBehaviour
 
     private void OnMouseUp()
     {
-        ChangeState(DragState.Returning);
-        ReturnToIntiialPosition();
+        LerpToInitialPosition();
     }
 
-    public void ReturnToIntiialPosition()
+    public void LerpToInitialPosition(Action action = null)
     {
-        StartCoroutine(_minion.ReturnToInitialPosition(() => ChangeState(DragState.Idle)));
+        List<Action> actions = new List<Action>();
+
+        ChangeState(DragState.Returning);
+        actions.Add(() => ChangeState(DragState.Idle));
+
+        if (action != null)
+        {
+            actions.Add(action);
+        }
+
+        StartCoroutine(_minion.LerpToInitialPosition(actions));
+    }
+
+    public void LerpToPosition(Vector3 initialPosition, Vector3 targetPosition, Action action = null)
+    {
+        float duration = 0.4f;
+        ChangeState(DragState.Returning);
+
+        List<Action> actions = new List<Action>();
+        actions.Add(() => ChangeState(DragState.Idle));
+
+        if (action != null)
+        {
+            actions.Add(action);
+        }
+
+        StartCoroutine(_minion.LerpToPosition(initialPosition, targetPosition, duration, actions));
     }
 
     public MinionCardData CardData { get => cardData;  set => cardData = value; }
