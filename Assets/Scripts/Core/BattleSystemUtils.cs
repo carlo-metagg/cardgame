@@ -22,4 +22,6 @@ public class BattleSystemUtils : IBattleSystemUtils
 
         return hit;
     }
+
+    public IMinionBehaviour GetMinionBehaviour(GameObject obj) => obj.GetComponent<IMinionBehaviour>();
 }

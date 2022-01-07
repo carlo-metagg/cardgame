@@ -1,19 +1,24 @@
-﻿public class BattleSystem
+﻿using Core.Managers;
+
+namespace Core
 {
-    private readonly CardManager _cardManager;
-
-    public BattleSystem(CardManager cardManager)
+    public class BattleSystem
     {
-        _cardManager = cardManager;
-    }
+        private readonly CardManager _cardManager;
 
-    public void PreparePlayArea()
-    {
-        _cardManager.InstantiateCards();
-    }
+        public BattleSystem(CardManager cardManager)
+        {
+            _cardManager = cardManager;
+        }
 
-    public void Draw()
-    {
-        _cardManager.Draw();
+        public void PreparePlayArea()
+        {
+            _cardManager.InstantiateCards();
+        }
+
+        public void Draw()
+        {
+            _cardManager.Draw();
+        }
     }
 }
