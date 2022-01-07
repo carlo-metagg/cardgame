@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class BattleSystem
+﻿public class BattleSystem
 {
     private readonly CardManager _cardManager;
 
