@@ -10,41 +10,49 @@ public class CardManager
     private ISpawner _spawner;
     private readonly DeckManager _deckManager;
     private GameObject _playerHand;
-    private readonly GameObject _cardPrefab;
     private readonly float _scaleFactor;
     private readonly float _separationFactor;
+
+    private CardManagerState _state;
 
     public CardManager(ISpawner spawner,
                        BattleSystemUtils utils,
                        DeckManager deckManager,
                        GameObject playerHand,
-                       GameObject cardPrefab,
-                       float scaleFactor, float separationFactor)
+                       float scaleFactor,
+                       float separationFactor)
     {
         _spawner = spawner;
         _utils = utils;
         _deckManager = deckManager;
         _playerHand = playerHand;
-        _cardPrefab = cardPrefab;
         _scaleFactor = scaleFactor;
         _separationFactor = separationFactor;
+
+        ChangeState(CardManagerState.Starting);
+    }
+
+    private void ChangeState(CardManagerState state)
+    {
+        _state = state;
     }
 
     public void Draw()
     {
-        GameObject card = _spawner.SpawnCard(_deckManager.DrawCard());
-        SetPositionToDeckLocation(card.transform, -1);
-        InitialCardRescale(card.transform);
+        if (CardManagerState.Idle != _state) return;
+
+        InstantiateCard();
 
         List<GameObject> children = _utils.GetChildren(_playerHand);
         List<Vector3> updatedPositions = GenerateCardPositionsOnPlayerHand(children.Count);
 
         for (int i = 0; i < children.Count; i++)
         {
+            ChangeState(CardManagerState.Drawing);
             MinionBehaviour minionBehaviour = children[i].GetComponent<MinionBehaviour>();
 
             minionBehaviour.SetInitialPosition(updatedPositions[i]);
-            minionBehaviour.ReturnToIntiialPosition();
+            minionBehaviour.LerpToInitialPosition(() => ChangeState(CardManagerState.Idle));
         }
     }
 
@@ -54,33 +62,34 @@ public class CardManager
 
         for (int i = 0; i < INITIAL_DRAW_COUNT; i++)
         {
-            float zAxis = -i / 10f;
+            ChangeState(CardManagerState.Starting);
+            GameObject card = InstantiateCard();
 
-            GameObject card = _spawner.SpawnCard(_deckManager.DrawCard());
-            SetPositionToDeckLocation(card.transform, -1);
-            SetInitialPosition(card.transform, targetPositions[i]);
-            InitialCardRescale(card.transform);
-
-            MinionBehaviour minionBehaviour = card.GetComponent<MinionBehaviour>();
-            minionBehaviour.SetInitialPosition(targetPositions[i]);
+            //SetInitialPosition(card.transform, targetPositions[i]);
+            card.GetComponent<MinionBehaviour>().SetInitialPosition(targetPositions[i]);
+            card.GetComponent<MinionBehaviour>().LerpToInitialPosition(() => ChangeState(CardManagerState.Idle));
         }
 
     }
-    private void SetPositionToDeckLocation(Transform cardTransform, float zAxis)
+
+    private GameObject InstantiateCard()
     {
-        cardTransform.SetParent(_playerHand.transform);
-        cardTransform.position = GetDeckLocation(zAxis);
+        GameObject card = _spawner.SpawnCard(_deckManager.DrawCard());
+        SetPositionToDeckLocation(card.transform);
+        InitialCardRescale(card.transform);
+        return card;
     }
 
-    private static Vector3 GetDeckLocation(float zAxis = 0f)
-    {
-        return new Vector3(-7, 0, zAxis);
-    }
-
-    private void SetInitialPosition(Transform cardTransform, Vector3 initialPosition)
+    private void SetPositionToDeckLocation(Transform cardTransform)
     {
         cardTransform.SetParent(_playerHand.transform);
-        cardTransform.localPosition = initialPosition;
+        cardTransform.position = new Vector3(-7, 0, -1);
+    }
+
+    private void SetInitialPosition(Transform cardTransform, Vector3 targetPosition)
+    {
+        cardTransform.SetParent(_playerHand.transform);
+        cardTransform.localPosition = targetPosition;
     }
 
     private void InitialCardRescale(Transform cardTransform)
@@ -94,8 +103,10 @@ public class CardManager
     private List<Vector3> GenerateCardPositionsOnPlayerHand(int length)
     {
         List<Vector3> output = new List<Vector3>();
+        int leftmostCardXPosition = 0;
+        float rightmostCardXPosition = _separationFactor * (length - 1);
 
-        float xAxisOffset = GetXAxisOffset(0, _separationFactor * (length - 1));
+        float xAxisOffset = GetXAxisOffset(leftmostCardXPosition, rightmostCardXPosition);
 
         for (int i = 0; i < length; i++)
         {
@@ -106,15 +117,12 @@ public class CardManager
         return output;
     }
 
-    private float GetXAxisOffset(float leftmostCardXPosition, float rightmostCardXPosition)
-    {
-        float canvasWidth = GetCanvasWidth(_cardPrefab);
+    private float GetXAxisOffset(float leftmostCardXPosition, float rightmostCardXPosition) => Math.Abs((leftmostCardXPosition  + rightmostCardXPosition) / 2f);
+}
 
-        float leftmostBorderXPosition = leftmostCardXPosition - canvasWidth;
-        float rightmostBorderXPosition = rightmostCardXPosition + canvasWidth;
-
-        return Math.Abs((leftmostBorderXPosition + rightmostBorderXPosition) / 2f);
-    }
-
-    private float GetCanvasWidth(GameObject obj) => obj.GetComponentInChildren<RectTransform>().rect.width;
+public enum CardManagerState
+{
+    Starting,
+    Idle,
+    Drawing
 }
