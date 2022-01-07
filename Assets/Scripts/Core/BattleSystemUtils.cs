@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleSystemUtils
+public class BattleSystemUtils : IBattleSystemUtils
 {
     public List<GameObject> GetChildren(GameObject obj)
     {

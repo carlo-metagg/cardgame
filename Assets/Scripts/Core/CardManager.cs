@@ -6,18 +6,18 @@ public class CardManager
 {
     private readonly int INITIAL_DRAW_COUNT = 3;
 
-    private readonly BattleSystemUtils _utils;
-    private ISpawner _spawner;
-    private readonly DeckManager _deckManager;
-    private GameObject _playerHand;
+    private readonly ISpawner _spawner;
+    private readonly IBattleSystemUtils _utils;
+    private readonly IDeckManager _deckManager;
+    private readonly GameObject _playerHand;
     private readonly float _scaleFactor;
     private readonly float _separationFactor;
 
     private CardManagerState _state;
 
     public CardManager(ISpawner spawner,
-                       BattleSystemUtils utils,
-                       DeckManager deckManager,
+                       IBattleSystemUtils utils,
+                       IDeckManager deckManager,
                        GameObject playerHand,
                        float scaleFactor,
                        float separationFactor)

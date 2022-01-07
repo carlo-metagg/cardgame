@@ -13,8 +13,8 @@ public class BattleSystemBehaviour : MonoBehaviour
     [SerializeField] private float separationFactor = 0.05f;
 
     private ISpawner spawner;
-    private BattleSystemUtils utils;
-    private DeckManager deckManager;
+    private IBattleSystemUtils utils;
+    private IDeckManager deckManager;
     private CardManager cardManager;
     private BattleSystem battleSystem;
     //private DragDropSystemBehaviour dragDrop;

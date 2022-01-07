@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class DeckManager
+public class DeckManager : IDeckManager
 {
     private readonly int DECK_SIZE = 20;
     List<MinionCardData> allCardData;
