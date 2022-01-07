@@ -54,7 +54,7 @@ public class Minion
         }
     }
 
-    public IEnumerator LerpToPosition(Vector3 intialPosition, Vector3 targetPosition, float duration, System.Collections.Generic.List<Action> actions)
+    public IEnumerator LerpToPosition(Vector3 intialPosition, Vector3 targetPosition, float duration, List<Action> actions)
     {
         float elapsedTime = 0;
 

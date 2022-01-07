@@ -1,5 +1,5 @@
-using System;
-using System.Collections.Generic;
+using Core;
+using Core.Managers;
 using UnityEngine;
 
 public class BattleSystemBehaviour : MonoBehaviour

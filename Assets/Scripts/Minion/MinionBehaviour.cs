@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MinionBehaviour : MonoBehaviour
+public class MinionBehaviour : MonoBehaviour, IMinionBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private MinionCardData cardData;
@@ -45,7 +45,7 @@ public class MinionBehaviour : MonoBehaviour
         ChangeState(DragState.Idle);
     }
 
-    void Start()
+    private void Start()
     {
         _cardDisplay = new CardDisplay(cardData,
                                       cardName,
@@ -118,12 +118,12 @@ public class MinionBehaviour : MonoBehaviour
         StartCoroutine(_minion.LerpToPosition(initialPosition, targetPosition, duration, actions));
     }
 
-    public MinionCardData CardData { get => cardData;  set => cardData = value; }
+    public MinionCardData CardData { get => cardData; set => cardData = value; }
 
     public Minion Minion { get => _minion; set => _minion = value; }
 
     public void SetCurrentPositionAsInitialPosition() => _minion.SetCurrentPositionAsInitialPosition();
-    
+
     public void SetInitialPosition(Vector3 position) => _minion.SetInitialPosition(position);
 
     public void Drag() => _minion.DragToPosition(GetTargetPosition());
